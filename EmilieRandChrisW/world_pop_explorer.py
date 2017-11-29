@@ -29,21 +29,36 @@ def main():
 
 def get_country_count():
     """Return the number of countries in country_populations.  Create a list
-	   where each element of the list contains a line of data from 
+	   where each element of the list contains a line of data from
 	   country_populations and return the length of this list"""
+    numbers=country_populations.split('\n')
+    count_numbers= len(numbers)-1
+    return count_numbers
 
-    pass
 
 def conv_num_with_commas(number_text):
     """Convert a number with commas (str) to a number.
        e.g. '1,000' would be converted to 1000"""
-
-    pass
+    number=number_text.split(',')
+    item=''
+    for numero in number:
+        item+=numero
+    final_number=float(item)
+    return final_number
 
 def get_top_five_countries():
     """Return a list of names of the top five countries in terms of population"""
+    countries=country_populations.split('\n')
+    top_5=[]
+    count=0
+    for country in countries:
+        if count<6:
+            data= country.split('\t')
+            top_5.append(data[1])
+            count+=1
+    top_5.remove('Country')
+    return top_5
 
-    pass
 
 def set_country_populations_dict():
     """Sets the country_populations_dict dictionary where key is country name
@@ -52,8 +67,14 @@ def set_country_populations_dict():
                Pop 01Jul2017 column
             2. The % decrease as a number
     """
-
-    pass
+    countries=country_populations.split('\n')
+    for country in countries:
+        country_data= country.split('\t')
+        name= country_data[1]
+        pop_2017= country_data[5]
+        percentage= country_data[6]
+        country_populations_dict.update({name:(pop_2017,percentage)})
+    return country_populations_dict
 
 
 def get_population(country_name):
@@ -61,8 +82,11 @@ def get_population(country_name):
        from country_populations_dict.  If the country_populations_dict is
        empty (i.e. no keys or values), then run set_country_populations_dict
        to initialize it."""
+    country_population=set_country_populations_dict()
+    country_data=country_population[country_name]
+    population_data=country_data[0]
+    return population_data
 
-    pass
 
 def get_continents():
     """Return the list of continents"""

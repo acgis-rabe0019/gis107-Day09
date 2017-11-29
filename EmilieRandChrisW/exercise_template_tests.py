@@ -11,6 +11,8 @@
 
 import sys
 import inspect
+import world_pop_explorer as wpe
+reload(wpe)
 
 # Add import statement for the module under test as follows:
 # import module_under_test as alias
@@ -40,9 +42,47 @@ def template_for_test_functions():
 
 # ------------------------------------------------------------------------------
 
-# Create test functions here using the template_for_test_functions above.
-# The name of the test functions needs to begin with "test"
+def test_get_country_count():
+    desc = "Get count of countries in list"
+    expected = 233
+    actual = wpe.get_country_count()
+    print_test_results(wpe.get_country_count, desc, expected, actual)
 
+def test_conv_num_with_commas():
+    desc = "convert a number with commas (str) to a number."
+    expected = 1244787
+    actual = wpe.conv_num_with_commas('1,244,787')
+    print_test_results(wpe.conv_num_with_commas, desc, expected, actual)
+
+def test_get_top_five_countries():
+    desc = "Get top five most populated countries in list"
+    expected = ['China', 'India', 'United States', 'Indonesia', 'Brazil']
+    actual = wpe.get_top_five_countries()
+    print_test_results(wpe.get_top_five_countries, desc, expected, actual)
+
+def test_set_country_populations_dict():
+    desc = "country population dict where key is country name and value is a tuple with 2 values"
+    expected = {'China':('1,409,517,397','+0.4%')}
+    actual = wpe.set_country_populations_dict()
+    print_test_results(wpe.set_country_populations_dict, desc, expected, actual)
+
+def test_get_population():
+    desc = "Get population for specified country"
+    expected = '1,409,517,397'
+    actual = wpe.get_population('China')
+    print_test_results(wpe.get_population, desc, expected, actual)
+
+def test_get_continents():
+    desc = "Get list of continents"
+    expected = ''
+    actual = wpe.get_continents()
+    print_test_results(wpe.get_population, desc, expected, actual)
+
+def test_get_continent_population():
+    desc = "Return dictionary with key is cont name and value is the total for the population"
+    expected = ''
+    ##actual = wpe.get_continent_populations('North America')
+    ##print_test_results(wpe.get_population, desc, expected, actual)
 # ------------------------------------------------------------------------------
 # Test template helper functions.  Code in this section should not need to
 # modified.
