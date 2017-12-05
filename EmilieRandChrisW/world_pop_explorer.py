@@ -90,14 +90,52 @@ def get_population(country_name):
 
 def get_continents():
     """Return the list of continents"""
+    data=country_populations.split('\n')
+    continents=[]
+    unique_cont=[]
 
-    pass
+    for country in data:
+        split_data= country.split('\t')
+        continents.append(split_data[2])
+    for cont in continents:
+        if cont != "Continent":
+            if continents.count(cont)>1:
+                while continents.count(cont)>1:
+                    continents.remove(cont)
+                unique_cont.append(cont)
+    return unique_cont
 
 def get_continent_populations():
     """Returns a dict where the key is the name of the continent and
        the value is the total of all countries on that continent"""
+    continents=["Asia","Europe","Americas","Africa","Oceania"]
+    Asia=0
+    Europe=0
+    Americas=0
+    Africa=0
+    Oceania=0
+    continent_population_dict=dict()
+    data=country_populations.split('\n')
 
-    pass
+    for country in data:
+        country_data= country.split('\t')
 
+        if country_data[2]==continents[0]:
+            Asia+=conv_num_with_commas(country_data[5])
+        if country_data[2]==continents[1]:
+            Europe+=conv_num_with_commas(country_data[5])
+        if country_data[2]==continents[2]:
+            Americas+=conv_num_with_commas(country_data[5])
+        if country_data[2]==continents[3]:
+            Africa+=conv_num_with_commas(country_data[5])
+        if country_data[2]==continents[4]:
+            Oceania+=conv_num_with_commas(country_data[5])
+    continent_population_dict[continents[0]]=Asia
+    continent_population_dict[continents[1]]=Europe
+    continent_population_dict[continents[2]]=Americas
+    continent_population_dict[continents[3]]=Africa
+    continent_population_dict[continents[4]]=Oceania
+    return continent_population_dict
 if __name__ == '__main__':
     main()
+
